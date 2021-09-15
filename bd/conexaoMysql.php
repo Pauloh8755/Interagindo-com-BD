@@ -6,11 +6,12 @@
     Responsável: Paulo Henrique
 ********************************************************/
 function conexaoMysql(){
+    require_once('functions/config.php');
     //Declarando variaveis para conexão com BD
-    $server = (string) 'localhost';
-    $user = (string) 'root';
-    $password = (string) 'bcd127';
-    $database = (string) 'db_contatos_2021_2t';
+    $server = (string) BD_SERVER;
+    $user = (string) BD_USER;
+    $password = (string) BD_PASSWORD;
+    $database = (string) BD_DATABASE;
     
     //Formas de criar a conexão com o BD
     /*
@@ -20,10 +21,12 @@ function conexaoMysql(){
     */
     
     if($conexao = mysqli_connect($server, $user, $password, $database)){
-        echo('Conexão com sucesso');
+        return $conexao;
     }
     else{
-        echo('falha ao conectar ao BD');
+        echo(ERRO_CONEXAO);
+        return false;
     }
+  
 }
 ?>

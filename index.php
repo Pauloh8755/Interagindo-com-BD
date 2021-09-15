@@ -1,8 +1,9 @@
 <?php
     require_once("bd/conexaoMysql.php");
     conexaoMysql();
-?>
 
+  
+?>
 <!DOCTYPE>
 <html lang="pt-br">
     <head>
@@ -18,7 +19,7 @@
             </div>
             <div id="cadastroInformacoes">
         
-                <form action="" name="frmCadastro" method="post" >
+                <form action="controller/recebeDadosCliente.php" name="frmCadastro" method="post" >
                    
                     <div class="campos">
                         <div class="cadastroInformacoesPessoais">
@@ -65,7 +66,7 @@
                             <label> Email: </label>
                         </div>
                         <div class="cadastroEntradaDeDados">
-                            <input type="email" name="txtEmail" value="" required>
+                            <input type="email" name="txtEmail" value="">
                         </div>
                     </div>
                     <div class="campos">
