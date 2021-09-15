@@ -1,3 +1,7 @@
+<?php
+    require_once("functions/conexaoMysql.php");
+?>
+
 <!DOCTYPE>
 <html lang="pt-br">
     <head>
