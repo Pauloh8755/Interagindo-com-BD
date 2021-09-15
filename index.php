@@ -1,5 +1,6 @@
 <?php
-    require_once("functions/conexaoMysql.php");
+    require_once("bd/conexaoMysql.php");
+    conexaoMysql();
 ?>
 
 <!DOCTYPE>

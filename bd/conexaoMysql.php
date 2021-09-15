@@ -20,10 +20,10 @@ function conexaoMysql(){
     */
     
     if($conexao = mysqli_connect($server, $user, $password, $database)){
-        echo('Conexão com sucesso')
+        echo('Conexão com sucesso');
     }
     else{
-        echo('falha ao conectar ao BD')
+        echo('falha ao conectar ao BD');
     }
 }
 ?>
