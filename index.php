@@ -26,7 +26,7 @@
                             <label> Nome: </label>
                         </div>
                         <div class="cadastroEntradaDeDados">
-                            <input type="text" name="txtNome" value="" placeholder="Digite seu Nome">
+                            <input type="text" name="txtNome" value="" maxlength="100" placeholder="Digite seu Nome">
                         </div>
                     </div>
                     <div class="campos">
@@ -34,7 +34,7 @@
                             <label> RG: </label>
                         </div>
                         <div class="cadastroEntradaDeDados">
-                            <input type="text" name="txtRG" value="" placeholder="Digite seu RG">
+                            <input type="text" name="txtRg" value="" maxlength="15" placeholder="Digite seu RG">
                         </div>
                     </div>
                     <div class="campos">
@@ -42,7 +42,7 @@
                             <label> CPF: </label>
                         </div>
                         <div class="cadastroEntradaDeDados">
-                            <input type="text" name="txtCPF" value="" placeholder="Digite seu CPF">
+                            <input type="text" name="txtCpf" value="" maxlength="30" placeholder="Digite seu CPF">
                         </div>
                     </div>
                     <div class="campos">
@@ -50,7 +50,7 @@
                             <label> Telefone: </label>
                         </div>
                         <div class="cadastroEntradaDeDados">
-                            <input type="tel" name="txtTel" value="" placeholder="Digite seu Telefone">
+                            <input type="tel" name="txtTel" value="" maxlength="13" placeholder="Digite seu Telefone">
                         </div>
                     </div>
                     <div class="campos">
@@ -58,7 +58,7 @@
                             <label> Celular: </label>
                         </div>
                         <div class="cadastroEntradaDeDados">
-                            <input type="tel" name="txtCelular" value="">
+                            <input type="tel" name="txtCelular"  maxlength="13" value="">
                         </div>
                     </div>
                     <div class="campos">
@@ -66,7 +66,7 @@
                             <label> Email: </label>
                         </div>
                         <div class="cadastroEntradaDeDados">
-                            <input type="email" name="txtEmail" value="">
+                            <input type="email" name="txtEmail" maxlength="100" value="">
                         </div>
                     </div>
                     <div class="campos">

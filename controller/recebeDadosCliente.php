@@ -6,17 +6,50 @@
     Responsavel: Paulo Henrique
 ********************************************************************/
 
-//verificando request POST
+//import de mensagens de erro e configurações
+require_once('../functions/config.php');
+//import da função inserir clientes
+require_once('../bd/inserirCliente.php');
+
+//verificando qual request foi encaminhado para o form (GET/POST)
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    //Declarando Variáveis
+    //Declarando Variáveis e recebendo valores via POST
     $nome = (String) $_POST['txtNome'];
-    $rg = (String) $_POST['txtRG'];
-    $cpf = (String) $_POST['txtCPF'];
+    $rg = (String) $_POST['txtRg'];
+    $cpf = (String) $_POST['txtCpf'];
     $telefone = (String) $_POST['txtTel'];
     $celular = (String) $_POST['txtCelular'];
     $email = (String) $_POST['txtEmail'];
     $obs = (String) $_POST['txtObs'];
     
-    echo($nome . $rg . $cpf . $telefone . $celular . $email . $obs);
+    //tratamento para campos vazios
+    if($nome == null || $rg == null || $cpf == null){
+        echo("<script>
+                alert('" . ERRO_CAIXA_VAZIA . "') 
+                window.history.back()
+            </script>");
+    }
+    //tratamento para quantidade de caracteres (ideal ser feito no front)
+    //strlen retorna a quantidade de caracteres de uma variável
+    else if(strlen($nome) > 100 || strlen($rg) > 15 || strlen($cpf) > 20){
+        echo("<script> 
+                alert('". ERRO_MAXLENGTH . "')
+                window.history.back()
+            </script>");
+    }
+    else{
+        //Criando array para encaminhar dados a função inserir
+        $cliente = array (
+            "nome" => $nome,
+            "rg" => $rg,
+            "cpf" => $cpf,
+            "telefone" => $telefone,
+            "celular" => $celular,
+            "email" => $email,
+            "obs" => $obs
+        );
+        //chamando função do arquivo inserirCliente, e encaminha o array com os dados do cliente
+        insertCliente($cliente);
+    }
 }
 ?>

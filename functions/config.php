@@ -14,4 +14,6 @@ const BD_DATABASE = 'db_contatos_2021_2t';
 
 //Declarando constantes de ERRO
 const ERRO_CONEXAO = 'Não foi possivel realizar a conexão com o Banco de Dados, por favor entre em contato com o administrador do sistemas';
+const ERRO_CAIXA_VAZIA = 'Não foi possível realizar a operação, pois existem campos obrigatórios a serem preenchidos';
+const ERRO_MAXLENGTH = 'Não foi possível realizar a operação, pois a quantidade de caracteres ultrapassou o limite.';
 ?>
