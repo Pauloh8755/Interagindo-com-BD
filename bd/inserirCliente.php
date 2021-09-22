@@ -9,7 +9,7 @@ require_once('../bd/conexaoMysql.php');
 
 //function para inserir dados do cliente
 function insertCliente($arrayCliente){
-    $sql = "insert into tbl_cliente(
+    $sql = "insert into tbl_clientes(
                 nome,
                 rg, 
                 cpf,
@@ -26,11 +26,16 @@ function insertCliente($arrayCliente){
                     '".$arrayCliente['email']."',
                     '".$arrayCliente['obs']."'
             )";
-    //chamando fiunção que estabelece a conexão com o BD
+    //chamando função que estabelece a conexão com o BD
     $conexao = conexaoMysql();
     
-    //envia o script slq para o BD
-    mysqli_query($conexao, $sql);
+    //envia o script slq para o BD (retorna true ou false)
+    if(mysqli_query($conexao, $sql)){
+        return true;    //retorna true se o registro for inserido com sucesso
+    }
+    else{
+        return false;   //retorna false se o registro não for inserido
+    }
 }
 
 ?>

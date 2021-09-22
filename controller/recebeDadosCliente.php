@@ -9,7 +9,7 @@
 //import de mensagens de erro e configurações
 require_once('../functions/config.php');
 //import da função inserir clientes
-require_once('../bd/inserirCliente.php');
+require_once(RAIZ . '/bd/inserirCliente.php');
 
 //verificando qual request foi encaminhado para o form (GET/POST)
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -49,7 +49,18 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             "obs" => $obs
         );
         //chamando função do arquivo inserirCliente, e encaminha o array com os dados do cliente
-        insertCliente($cliente);
+        if(insertCliente($cliente)){
+            echo("<script>
+                    alert('".BD_INSERIDO."')
+                    window.location.href = '../index.php';
+                </script>");
+        }
+        else{
+            echo("<script>
+                    alert('".BD_ERRO."')
+                    window.history.back()
+                </script>");
+        }
     }
 }
 ?>

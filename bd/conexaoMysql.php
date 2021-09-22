@@ -6,8 +6,13 @@
     Responsável: Paulo Henrique
 ********************************************************/
 function conexaoMysql(){
-    require_once('../functions/config.php');
+    // require_once('functions/config.php'); 
+    /*\==> Não é mais necessario pois já esta sendo importado em outros arquivos 
+    onde a conexão é chamada*/
+
+
     //Declarando variaveis para conexão com BD
+
     $server = (string) BD_SERVER;
     $user = (string) BD_USER;
     $password = (string) BD_PASSWORD;

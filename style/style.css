@@ -1,9 +1,13 @@
 *{
     font-family: verdana;
-}
-body, h1, p{
+    outline: none;
     margin: 0px;
     padding: 0px;
+    
+}
+
+body{
+    background-color: #f2f2f2;
 }
 #cadastro{
     width: 800px;
@@ -13,8 +17,9 @@ body, h1, p{
     margin-right: auto;
     border-radius: 10px;
     box-sizing: border-box;
-    border: solid 1px black;
-    box-shadow: 10px 10px 10px #cccccc;
+    box-shadow: 0px 0px 15px #8a8a8a;
+    margin-top: 25px;
+    background-color: white;
 }
 #cadastroTitulo{
     border-top-left-radius: 10px;
@@ -67,14 +72,19 @@ select {
     height: 30px;
     margin-left: 10px;
     width: 90%;
+ 
 
 }
 
 input[type=text]:hover, 
 input[type=tel]:hover, 
-input[type=email]:hover{
-    background-color: rgb(246, 246, 196);
-    transition: 1s;
+input[type=email]:hover,
+input[type=text]:focus, 
+input[type=tel]:focus, 
+input[type=email]:focus{
+    background-color: #ebfaff;
+    border:solid 2px rgb(75, 178, 247);
+    border-radius: 2px;
 }
 
 
@@ -90,13 +100,15 @@ input[type=email]:hover{
     color: white;
     margin-top: 30px;
     font-size: 1.2em;
+    border: 0;
+    border-radius: 5px;;
 }
 
 .enviar input:hover{
     background-color: rgb(2, 131, 45);
     cursor: pointer;
     transform: scale(1.1);
-    transition: 1s;
+    transition: .4s;
 
 }
 

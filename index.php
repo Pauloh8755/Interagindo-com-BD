@@ -1,7 +1,11 @@
 <?php
-    require_once("bd/conexaoMysql.php");
-    conexaoMysql();
+    //Invocando arquivo de configuração para utilizar constante RAIZ
+    require_once("functions/config.php");
 
+    //Invocando conexão com o banco
+    require_once(RAIZ . "bd/conexaoMysql.php");
+    conexaoMysql();
+  
   
 ?>
 <!DOCTYPE>
@@ -12,7 +16,7 @@
         <link rel="stylesheet" type="text/css" href="style/style.css">
 
     </head>
-    <body>
+    <body>   
         <div id="cadastro"> 
             <div id="cadastroTitulo"> 
                 <h1> Cadastro de Contatos </h1>
