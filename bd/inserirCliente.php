@@ -9,7 +9,7 @@ require_once('../bd/conexaoMysql.php');
 
 //function para inserir dados do cliente
 function insertCliente($arrayCliente){
-    $sql = "insert into tbl_clientes(
+    $sql = "insert into tbl_cliente(
                 nome,
                 rg, 
                 cpf,

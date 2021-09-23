@@ -2,10 +2,11 @@
     //Invocando arquivo de configuração para utilizar constante RAIZ
     require_once("functions/config.php");
 
-    //Invocando conexão com o banco
+    //Importando arquivo de conexão com o banco
     require_once(RAIZ . "bd/conexaoMysql.php");
     conexaoMysql();
-  
+    //Importando arquivo para exibir os dados do cliente
+    require_once(RAIZ . "controller/exibeDadosCliente.php");
   
 ?>
 <!DOCTYPE>
@@ -102,16 +103,23 @@
                     <td class="tblColunas destaque"> Email </td>
                     <td class="tblColunas destaque"> Opções </td>
                 </tr>
-                <tr id="tblLinhas">
-                    <td class="tblColunas registros"></td>
-                    <td class="tblColunas registros"></td>
-                    <td class="tblColunas registros"></td>
-                    <td class="tblColunas registros">
-                        <img src="img/edit.png" alt="Editar" title="Editar" class="editar">
-                        <img src="img/trash.png" alt="Excluir" title="Excluir" class="excluir">
-                        <img src="img/search.png" alt="Visualizar" title="Visualizar" class="pesquisar">
-                    </td>
-                </tr>
+                <?php
+                    $dadosClientes = exibirClientes();
+                    while ($rsClientes=mysqli_fetch_assoc($dadosClientes)){
+                ?>
+                    <tr id="tblLinhas">
+                        <td class="tblColunas registros"><?=$rsClientes['nome']?></td>
+                        <td class="tblColunas registros"><?=$rsClientes['celular']?></td>
+                        <td class="tblColunas registros"><?=$rsClientes['email']?></td>
+                        <td class="tblColunas registros">
+                            <img src="img/edit.png" alt="Editar" title="Editar" class="editar">
+                            <img src="img/trash.png" alt="Excluir" title="Excluir" class="excluir">
+                            <img src="img/search.png" alt="Visualizar" title="Visualizar" class="pesquisar">
+                        </td>
+                    </tr>
+                <?php
+                    }
+                ?>
             </table>
         </div>
     </body>
