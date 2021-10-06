@@ -20,8 +20,11 @@ const ERRO_CONEXAO = 'Não foi possivel realizar a conexão com o Banco de Dados
 const ERRO_CAIXA_VAZIA = 'Não foi possível realizar a operação, pois existem campos obrigatórios a serem preenchidos';
 const ERRO_MAXLENGTH = 'Não foi possível realizar a operação, pois a quantidade de caracteres ultrapassou o limite.';
 
-//Declarando constantes de realização do insert
+//Declarando constantes de realização do insert e delete
 const BD_INSERIDO = 'Registro salvo com sucesso no Banco de Dados!!';
 const BD_ERRO = 'ERRO: Não foi possivel manipular os dados no Banco de Dados';
+const BD_EXCLUIDO = 'Registro excluído com sucesso!!';
+
+
 
 ?>

@@ -1,6 +1,6 @@
 <?php
 /*****************************************************************
-    Objetivo: buscar ou listaros dados de clientes, solicitando ao 
+    Objetivo: buscar ou listar os dados de clientes, solicitando ao 
     banco de dados.
     Data: 23/09/2021
     Responsavel: Paulo Henrique     
