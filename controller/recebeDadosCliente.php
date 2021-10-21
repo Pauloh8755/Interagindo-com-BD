@@ -10,6 +10,8 @@
 require_once('../functions/config.php');
 //import da função inserir clientes
 require_once(RAIZ . '/bd/inserirCliente.php');
+//import da função atualizar clientes
+require_once(RAIZ . '/bd/atualizarCliente.php');
 
 //verificando qual request foi encaminhado para o form (GET/POST)
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -21,6 +23,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $celular = (String) $_POST['txtCelular'];
     $email = (String) $_POST['txtEmail'];
     $obs = (String) $_POST['txtObs'];
+
+    //Recebendo id via GET
+    $id = (int) $_GET['id'];
     
     //tratamento para campos vazios
     if($nome == null || $rg == null || $cpf == null){
@@ -46,21 +51,39 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             "telefone" => $telefone,
             "celular" => $celular,
             "email" => $email,
-            "obs" => $obs
+            "obs" => $obs,
+            "id" => $id
         );
-        //chamando função do arquivo inserirCliente, e encaminha o array com os dados do cliente
-        if(insertCliente($cliente)){
-            echo("<script>
-                    alert('".BD_INSERIDO."')
-                    window.location.href = '../index.php';
-                </script>");
+        //validação para identificar inserção de um novo registro ou atualização 
+        if(strtoupper($_GET['modo']) == "SALVAR"){
+            //chamando função do arquivo inserirCliente, e encaminha o array com os dados do cliente
+            if(insertCliente($cliente)){
+                echo("<script>
+                        alert('".BD_INSERIDO."')
+                        window.location.href = '../index.php';
+                    </script>");
+            }
+            else{
+                echo("<script>
+                        alert('".BD_ERRO."')
+                        window.history.back()
+                    </script>");
+            }
         }
-        else{
-            echo("<script>
-                    alert('".BD_ERRO."')
-                    window.history.back()
-                </script>");
-        }
+        elseif(strtoupper($_GET['modo']) == "ATUALIZAR"){
+            if(updateCliente($cliente)){
+                echo("<script>
+                        alert('".BD_INSERIDO."')
+                        window.location.href = '../index.php';
+                    </script>");
+            }
+            else{
+                echo("<script>
+                        alert('".BD_ERRO."')
+                        window.history.back()
+                    </script>");
+            }
+        }    
     }
 }
 ?>

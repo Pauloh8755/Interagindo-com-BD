@@ -12,6 +12,11 @@
     $email = (string) null;
     $obs = (string) null;
 
+    //Será utilizada para definir o modo de manipulação dos dados
+    //Salvar -> Insert
+    //Atualizar -> Update
+    $modo = (string) "Salvar";
+
     //Invocando arquivo de configuração para utilizar constante RAIZ
     require_once("functions/config.php");
 
@@ -33,28 +38,77 @@
         $email = $_SESSION['cliente']['email'];
         $obs = $_SESSION['cliente']['obs'];
 
+        $modo = "Atualizar";
+
         //Elimina um objeto, variavel da memória
         unset($_SESSION['cliente']);
     }
-
 ?>
-<!DOCTYPE>
-<html lang="pt-br">
+<!DOCTYPE html>
+<html lang="pt-BR">
     <head>
         <meta charset="UTF-8">
         <title> Cadastro </title>
         <link rel="stylesheet" type="text/css" href="style/style.css">
+        <script src="js/jquery.js"></script>
+        <script>
+            $(document).ready(function(){
+                $("#container-modal").css('display', 'none');
+                $("#fechar").css('display', 'none');
 
+                // Abre Modal
+                $(".pesquisar").click(function(){
+                     // recebendo id do html- trabalhamos com this para referenciar elemento clicado
+                     let idCliente = $(this).data('id');
+                        //Realiza uma requisição para consumir dados de otra pagina
+                        $.ajax({
+                            type: "GET", //Tipo de requisição (GET, POST,PUT, etc)
+                            url: "visualizarDados.php", //URL dapágina que sera consumida
+                            data: {id: idCliente},
+
+                            //se a requisição der certo, recebemos conteúdo na variavel dados
+                            success: function(dados){ 
+                                $(".modal-contato").html(dados)//exibe dentro da div modal
+                            }
+                        });
+
+                    $("#container-modal").fadeIn(400).ready(function(){
+                        $(".modal-contato").slideToggle(700);
+                        $("#fechar").slideToggle(700);
+                        
+                       
+                    });
+                });
+                // Fecha Modal
+                $("#fechar").click(function(){
+                    $('.modal-contato').fadeOut(400);
+                    $("#container-modal").fadeOut(400);
+                    $("#fechar").fadeOut(400);
+                    
+                });
+            });
+        </script>
     </head>
-    <body>   
+    <body>
+        <div id="container-modal">
+            
+            <div class="modal-contato">
+
+            </div>
+            <span id="fechar">
+                X
+            </span>
+        </div>   
         <div id="cadastro"> 
             <div id="cadastroTitulo"> 
                 <h1> Cadastro de Contatos </h1>
             </div>
             <div id="cadastroInformacoes">
-        
-                <form action="controller/recebeDadosCliente.php" name="frmCadastro" method="post" >
-                   
+                <!-- 
+                    Passando variaveis modo e id por get, sendo id para identificar o registro a ser atualizado 
+                    * e modo para identificar a ação de manipulção de dados que sera executada(insert ou update) 
+                -->
+                <form action="controller/recebeDadosCliente.php?modo=<?=$modo?>&id=<?=$id?>" name="frmCadastro" method="post" >
                     <div class="campos">
                         <div class="cadastroInformacoesPessoais">
                             <label> Nome: </label>
@@ -113,7 +167,7 @@
                     </div>
                     <div class="enviar">
                         <div class="enviar">
-                            <input type="submit" name="btnEnviar" value="Salvar">
+                            <input type="submit" name="btnEnviar" value="<?=$modo?>">
                         </div>
                     </div>
                 </form>
@@ -152,9 +206,9 @@
                                 <img src="img/trash.png" alt="Excluir" title="Excluir" class="excluir">
                             </a>
                             <!-- Encaminhando id para o controller através de um link  -->
-                            <a href="controller/exibirInstanciaCliente.php?id=<?=$rsClientes['id_cliente']?>">
-                                <img src="img/search.png" alt="Visualizar" title="Visualizar" class="pesquisar">
-                            </a>
+                            <!-- <a href="controller/exibirInstanciaCliente.php?id=<?=$rsClientes['id_cliente']?>"> -->
+                                <img src="img/search.png" alt="Visualizar" title="Visualizar" class="pesquisar" data-id="<?=$rsClientes['id_cliente']?>">
+                            <!-- </a> -->
                         </td>
                     </tr>
                 <?php
