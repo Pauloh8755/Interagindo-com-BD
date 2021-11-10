@@ -25,6 +25,14 @@ const BD_INSERIDO = 'Registro salvo com sucesso no Banco de Dados!!';
 const BD_ERRO = 'ERRO: Não foi possivel manipular os dados no Banco de Dados';
 const BD_EXCLUIDO = 'Registro excluído com sucesso!!';
 
+//Declarando constantes para Upload de arquivos
+const DIRETORIO_FILE = 'files/';
+//recebendo extensões permitidas em uma array
+$extensoesPermitidas = array ("image/png","image/jpg","image/jpeg");
+//recebendo array em uma contante
+define('EXTENSION_ALLOWED', $extensoesPermitidas);
+const TAMANHO_FILE = "5120";
+
 
 
 ?>

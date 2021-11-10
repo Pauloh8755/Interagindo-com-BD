@@ -23,6 +23,10 @@
                 <td class="tblColunas registros"><?=$dadosCliente['nome']?></td>
             </tr>
             <tr class="tblLinhas">
+                <td class="tblColunas">Estado:</td>
+                <td class="tblColunas registros"><?=$dadosCliente['id_estado']?></td>
+            </tr>
+            <tr class="tblLinhas">
                 <td class="tblColunas">RG:</td>
                 <td class="tblColunas registros"><?=$dadosCliente['rg']?></td>
             </tr>

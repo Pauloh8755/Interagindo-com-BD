@@ -24,6 +24,7 @@ $dadosCliente = selectInstancia($idCliente);
         $_SESSION['cliente'] = $rsCliente;
         //Similar ao href, permite chamar um arquivo como se fosse um link, através do php
         header('location:../index.php');
+        // echo($_SESSION['cliente']['id_estado']);
     }
     else{
         echo("<script>

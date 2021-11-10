@@ -12,11 +12,14 @@ require_once('../functions/config.php');
 require_once(RAIZ . '/bd/inserirCliente.php');
 //import da função atualizar clientes
 require_once(RAIZ . '/bd/atualizarCliente.php');
+//import para arquivo de upload
+require_once(RAIZ . '/functions/upload.php');
 
 //verificando qual request foi encaminhado para o form (GET/POST)
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     //Declarando Variáveis e recebendo valores via POST
     $nome = (String) $_POST['txtNome'];
+    $estado = (int) $_POST['selectEstado'];
     $rg = (String) $_POST['txtRg'];
     $cpf = (String) $_POST['txtCpf'];
     $telefone = (String) $_POST['txtTel'];
@@ -24,6 +27,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $email = (String) $_POST['txtEmail'];
     $obs = (String) $_POST['txtObs'];
 
+    //$_FILES['fileFoto'] recebendo um objeto file
+    $foto = uploadFile($_FILES['fileFoto']);
+  
+     //parar codigo a fim de teste= die;
+  
     //Recebendo id via GET
     $id = (int) $_GET['id'];
     
@@ -47,12 +55,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $cliente = array (
             "nome" => $nome,
             "rg" => $rg,
+            "estado"=>  $estado,
             "cpf" => $cpf,
             "telefone" => $telefone,
             "celular" => $celular,
             "email" => $email,
             "obs" => $obs,
-            "id" => $id
+            "id" => $id,
+            "foto" => $foto
         );
         //validação para identificar inserção de um novo registro ou atualização 
         if(strtoupper($_GET['modo']) == "SALVAR"){

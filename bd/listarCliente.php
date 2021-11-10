@@ -24,7 +24,7 @@ function selectCliente(){
 //retorna apenas uma instancia, com base no id
 function selectInstancia($idCliente){
     //recebendo comamdo slq  para buscar cliente pelo id
-    $sql = "select * from tbl_cliente where id_cliente =" .$idCliente;
+    $sql = "select tbl_cliente.*, tbl_estado.sigla from tbl_cliente inner join tbl_estado on tbl_estado.id_estado = tbl_cliente.id_estado where tbl_cliente.id_cliente =" .$idCliente;
     //abindo conexão
     $conexao = conexaoMysql();
 

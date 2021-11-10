@@ -12,7 +12,7 @@ body{
 
 #cadastro{
     width: 800px;
-    min-height: 700px;
+    min-height: 800px;
     height: auto;
     margin-left: auto;
     margin-right: auto;
@@ -220,6 +220,9 @@ input[type=email]:focus{
 .tblPesquisar{
     width: 100%;
     height: 100%;
+}
+.img-perfil{
+    width: 80px;
 }
 /* ============== MODAL ====================== */
 #container-modal{

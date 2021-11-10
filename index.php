@@ -5,6 +5,7 @@
     //Declarando variaveis para o formulário
     $id= (string) null;
     $nome = (string) null;
+    $estado = (String) null;
     $telefone = (string) null;
     $celular = (string) null;
     $rg = (string) null;
@@ -25,11 +26,15 @@
     conexaoMysql();
     //Importando arquivo para exibir os dados do cliente
     require_once(RAIZ . "controller/exibeDadosCliente.php");
+
+    //Importando arquivo para listar estados
+    require_once(RAIZ . "controller/listarDadosEstado.php");
   
     //verificando se a variavel de seção existe
     if(isset($_SESSION['cliente'])){
         $id = $_SESSION['cliente']['id_cliente'];
         $nome = $_SESSION['cliente']['nome'];
+        $estado = $_SESSION['cliente']['id_estado'];
         $telefone = $_SESSION['cliente']['telefone'];
         $rg = $_SESSION['cliente']['rg'];
         $cpf = $_SESSION['cliente']['cpf'];
@@ -39,7 +44,6 @@
         $obs = $_SESSION['cliente']['obs'];
 
         $modo = "Atualizar";
-
         //Elimina um objeto, variavel da memória
         unset($_SESSION['cliente']);
     }
@@ -108,13 +112,43 @@
                     Passando variaveis modo e id por get, sendo id para identificar o registro a ser atualizado 
                     * e modo para identificar a ação de manipulção de dados que sera executada(insert ou update) 
                 -->
-                <form action="controller/recebeDadosCliente.php?modo=<?=$modo?>&id=<?=$id?>" name="frmCadastro" method="post" >
+                <form enctype="multipart/form-data" action="controller/recebeDadosCliente.php?modo=<?=$modo?>&id=<?=$id?>" name="frmCadastro" method="post" >
                     <div class="campos">
                         <div class="cadastroInformacoesPessoais">
                             <label> Nome: </label>
                         </div>
                         <div class="cadastroEntradaDeDados">
                             <input type="text" name="txtNome" value="<?=$nome?>" maxlength="100" placeholder="Digite seu Nome">
+                        </div>
+                    </div>
+                    <div class="campos">
+                        <div class="cadastroInformacoesPessoais">
+                            <label> Foto: </label>
+                        </div>
+                        <div class="cadastroEntradaDeDados">
+                            <!-- Input para envios de arquivos -->
+                            <input type="file" name="fileFoto" accept="image/jpeg,image/png,image/jpg">
+                        </div>
+                    </div>
+                    <div class="campos">
+                        <div class="cadastroInformacoesPessoais">
+                            <label> Estado: </label>
+                        </div>
+                        <div class="cadastroEntradaDeDados">
+                            <select name="selectEstado">
+                                <option value="">Selecione seu Estado</option>
+                                <?php
+                                    $dadosEstado = exibirEstados();
+                                    // echo("</select>" . $estado);
+                                    while($rsEstado = mysqli_fetch_assoc($dadosEstado)){
+                                        
+                                ?>
+                                <option value="<?=$rsEstado['id_estado']?>"<?=$rsEstado['id_estado'] == $estado?'selected' : ''?>><?=$rsEstado['nome']?></option>
+                                <?php
+                                    }
+                                ?>
+                                <!-- <option selected>Teste</option> OBS: precisamos colocar enctype="multipart/form-data" -->
+                            </select>
                         </div>
                     </div>
                     <div class="campos">
@@ -182,6 +216,7 @@
                 </tr>
                 <tr id="tblLinhas">
                     <td class="tblColunas destaque"> Nome </td>
+                    <td class="tblColunas destaque"> Foto </td>
                     <td class="tblColunas destaque"> Celular </td>
                     <td class="tblColunas destaque"> Email </td>
                     <td class="tblColunas destaque"> Opções </td>
@@ -194,6 +229,7 @@
                 ?>
                     <tr id="tblLinhas">
                         <td class="tblColunas registros"><?=$rsClientes['nome']?></td>
+                        <td class="tblColunas registros"><img class="img-perfil"src="files/<?=$rsClientes['foto']?>"></td>
                         <td class="tblColunas registros"><?=$rsClientes['celular']?></td>
                         <td class="tblColunas registros"><?=$rsClientes['email']?></td>
                         <td class="tblColunas registros">
