@@ -12,6 +12,7 @@
     $cpf = (string) null;
     $email = (string) null;
     $obs = (string) null;
+    $foto= (string) null;
 
     //Será utilizada para definir o modo de manipulação dos dados
     //Salvar -> Insert
@@ -41,6 +42,8 @@
         $telefone = $_SESSION['cliente']['telefone'];
         $celular = $_SESSION['cliente']['celular'];
         $email = $_SESSION['cliente']['email'];
+        //recebendo foto de preview
+        $foto = $_SESSION['cliente']['foto'];
         $obs = $_SESSION['cliente']['obs'];
 
         $modo = "Atualizar";
@@ -112,7 +115,7 @@
                     Passando variaveis modo e id por get, sendo id para identificar o registro a ser atualizado 
                     * e modo para identificar a ação de manipulção de dados que sera executada(insert ou update) 
                 -->
-                <form enctype="multipart/form-data" action="controller/recebeDadosCliente.php?modo=<?=$modo?>&id=<?=$id?>" name="frmCadastro" method="post" >
+                <form enctype="multipart/form-data" action="controller/recebeDadosCliente.php?modo=<?=$modo?>&id=<?=$id?>&foto=<?=$foto?>" name="frmCadastro" method="post" >
                     <div class="campos">
                         <div class="cadastroInformacoesPessoais">
                             <label> Nome: </label>
@@ -128,6 +131,11 @@
                         <div class="cadastroEntradaDeDados">
                             <!-- Input para envios de arquivos -->
                             <input type="file" name="fileFoto" accept="image/jpeg,image/png,image/jpg">
+                            
+                        </div>
+                        <!-- container para foto de preview -->
+                        <div class="container-foto">
+                            <img src="files/<?=$foto?>">
                         </div>
                     </div>
                     <div class="campos">
@@ -236,9 +244,9 @@
                             <a href="controller/editarDadosCliente.php?id=<?=$rsClientes['id_cliente']?>"> 
                                 <img src="img/edit.png" alt="Editar" title="Editar" class="editar">
                             </a>
-                            <!-- Encaminhando id para o controller através de um link -->
+                            <!-- Encaminhando id e nome da imagem do cliente para o controller através de um link  -->
                             <!-- E confirmando através do evento onclick com a função confirm e return(se True o html executa atarefa solicitada ) -->
-                            <a onclick="return confirm('Para excluir clique em OK')" href="controller/excluiDadosCliente.php?id=<?=$rsClientes['id_cliente']?>">
+                            <a onclick="return confirm('Para excluir clique em OK')" href="controller/excluiDadosCliente.php?id=<?=$rsClientes['id_cliente']?>&foto=<?=$rsClientes['foto']?>">
                                 <img src="img/trash.png" alt="Excluir" title="Excluir" class="excluir">
                             </a>
                             <!-- Encaminhando id para o controller através de um link  -->

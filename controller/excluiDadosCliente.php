@@ -14,7 +14,14 @@ require_once(RAIZ . "/bd/excluiCliente.php");
         * com o id sendo encaminhado pela index através do link contido no botão exluir
         * e validando se ela foi bem sucedida.
     *****************************************************************************/
-    if(delete($idCliente = $_GET['id'])){
+    //resgatando parametros passados via get
+    $idCliente = $_GET['id'];
+    $fotoName = $_GET['foto'];
+
+    //invocando função e testando return a fim de tratamentos de mensagens
+    if(delete($idCliente)){
+        //apagando foto do usuario ao exluir instancia no bd
+        unlink(RAIZ.DIRETORIO_FILE.$fotoName);
         echo("<script>
                     alert('".BD_EXCLUIDO."')
                     window.location.href = '../index.php';

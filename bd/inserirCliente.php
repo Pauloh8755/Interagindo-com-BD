@@ -8,7 +8,7 @@
 require_once('../bd/conexaoMysql.php');
 
 //function para inserir dados do cliente
-function insertCliente($arrayCliente){
+function insertCliente($arrayCliente){ 
     $sql = "insert into tbl_cliente(
                 nome,
                 foto,
@@ -21,7 +21,7 @@ function insertCliente($arrayCliente){
                 obs
             )
             values('". $arrayCliente['nome']."',
-                    ".$arrayCliente['foto'].",
+                    '".$arrayCliente['foto']."',
                     '".$arrayCliente['estado']."',
                     '".$arrayCliente['rg']."',
                     '".$arrayCliente['cpf']."',

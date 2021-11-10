@@ -40,6 +40,7 @@ body{
     flex-direction: row;
     margin-bottom: 10px;
     margin-top: 10px;
+    position: relative;
 }
 .cadastroInformacoesPessoais  {
     width: 270px;
@@ -265,4 +266,18 @@ input[type=email]:focus{
 }
 #fechar:hover{
     background-color: rgb(197, 77, 77);
+}
+.container-foto{
+    width: 200px;
+    height: 200px;
+    /* background-color: #000000; */
+   position: absolute;
+   right: -250px;
+   border-radius: 5px;
+}
+.container-foto > img{
+    width: inherit;
+    height: inherit;
+    border-radius: 5px;
+    box-shadow: 0px 0px 20px #0004;
 }

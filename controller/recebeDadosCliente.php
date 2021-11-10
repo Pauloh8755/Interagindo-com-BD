@@ -27,8 +27,24 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $email = (String) $_POST['txtEmail'];
     $obs = (String) $_POST['txtObs'];
 
-    //$_FILES['fileFoto'] recebendo um objeto file
-    $foto = uploadFile($_FILES['fileFoto']);
+    //recebendo nome da foto cadastrada no banco via get
+    $fotoName = $_GET['foto'];
+
+    //testando modo para tratamento de upload de imagem
+    if(strtoupper($_GET['modo']) == "ATUALIZAR"){
+        if($_FILES['fileFoto']['name'] != ""){
+            //$_FILES['fileFoto'] recebendo um objeto file
+            $foto = uploadFile($_FILES['fileFoto']);
+        }
+        else{
+            $foto = $fotoName;
+        }
+    }
+    else{
+        //$_FILES['fileFoto'] recebendo um objeto file
+        $foto = uploadFile($_FILES['fileFoto']);
+    }
+  
   
      //parar codigo a fim de teste= die;
   
