@@ -35,6 +35,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         if($_FILES['fileFoto']['name'] != ""){
             //$_FILES['fileFoto'] recebendo um objeto file
             $foto = uploadFile($_FILES['fileFoto']);
+            //apagar imagem antiga
+            unlink(RAIZ.DIRETORIO_FILE.$fotoName);
         }
         else{
             $foto = $fotoName;

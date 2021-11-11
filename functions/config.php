@@ -7,7 +7,7 @@
 *********************************************************************/
 
 //Declarando contante para indicar o diretório $_SERVER -> mostra caminho da raiz
-define ('RAIZ', $_SERVER['DOCUMENT_ROOT']. '/ds2t20212/paulo/Interagindo-com-BD/');
+define ('RAIZ', $_SERVER['DOCUMENT_ROOT']. '/ds2t20212/paulo1/Interagindo-com-BD/');
 
 //Declarando constantes para conexão com o banco de dados MySql
 const BD_SERVER = 'localhost';

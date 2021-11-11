@@ -11,6 +11,7 @@ require_once('../bd/conexaoMysql.php');
 function updateCliente($arrayCliente){
     $slq = "update tbl_cliente set 
                 nome ='".$arrayCliente['nome']."',
+                foto = '".$arrayCliente['foto']."',
                 rg = '".$arrayCliente['rg']."',
                 cpf = '".$arrayCliente['cpf']."',
                 telefone = '".$arrayCliente['telefone']."',

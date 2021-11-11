@@ -12,7 +12,7 @@
     $cpf = (string) null;
     $email = (string) null;
     $obs = (string) null;
-    $foto= (string) null;
+    $foto= (string) "foto.png";
 
     //Será utilizada para definir o modo de manipulação dos dados
     //Salvar -> Insert
