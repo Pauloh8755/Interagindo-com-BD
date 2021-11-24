@@ -10,7 +10,7 @@ require_once(RAIZ . "bd/conexaoMysql.php");
 function selectCliente(){
     //recebendo comando slq. Utilizamos order by para ordenar esse select
     //                             ordernar por id do cliente decrescente                    
-    $sql = "select * from tbl_cliente order by id_cliente desc";
+    $sql = "select tbl_cliente.*, tbl_estado.sigla from tbl_cliente inner join tbl_estado on tbl_estado.id_estado = tbl_cliente.id_estado order by id_cliente desc";
 
     //abre a conexão com o BD
     $conexao = conexaoMysql();

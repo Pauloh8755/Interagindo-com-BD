@@ -6,8 +6,7 @@
 *************************************************************************/   
      
 function visualizarCliente ($id){
-    //importando arquivo de configuração
-    require_once("functions/config.php");
+    
     //import do arquivo de select do cliente
     require_once(RAIZ . "/bd/listarCliente.php");
     //recebendo id via Argumento
