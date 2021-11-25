@@ -15,10 +15,16 @@ function delete($idCliente){
     //invocando conexão com o banco
     $conexao = conexaoMysql();
 
+    
     //Enviando script para o banco através do mysqli_query(conexao e script)
     //E testando se a operação foi realizada com sucesso.
     if(mysqli_query($conexao,$sql)){
-        return true;
+        if(mysqli_affected_rows($conexao)){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
     else{
         return false;

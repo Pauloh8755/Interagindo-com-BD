@@ -106,16 +106,75 @@
         }
     });
     //EndPoint: PUT, atualiza um cliente no BD
-    $app->put('/clientes', function($request, $response, $args){
-        return $response    ->withStatus(201)
-                            ->withHeader('Content-Type','application/json')
-                            ->write('{"message":"Item atualizado com sucesso"}');
+    $app->put('/clientes/{id}', function($request, $response, $args){
+       //recebendo content type do header para verificar se o padrão do body será json
+       $contentType = $request->getHeaderLine('Content-Type');
+       //Validadando se o tipo de arquivo é json
+       if($contentType == 'application/json'){
+           //recebe o conteudo enviado no body
+           $dadosBodyJson = $request->getParsedBody();
+
+           //validando se o corpo do arquivo está vazio
+           if($dadosBodyJson == "" || $dadosBodyJson == null || !isset($args['id']) || !is_numeric($args['id'])){
+               return $response    ->withStatus(406)
+                                   ->withHeader('Content-Type','application/json')
+                                   ->write('{"message":"Conteúdo enviado pelo body não contém dados válidos"}');
+           }
+           else{
+               
+               $id = $args['id'];
+               
+               //import do arquivo para manipular dados a serem inseridos
+               require_once(RAIZ. "/controller/recebeDadosClientesAPI.php");
+               
+               //inserindo e validando se os dados foram inseridos com sucesso
+               if(atualizarClienteAPI($dadosBodyJson, $id)){
+                
+                   return $response    ->withStatus(201)
+                                       ->withHeader('Content-Type','application/json')
+                                       ->write('{"message":"Cliente Atualizado com sucesso"}');
+               }
+               else{
+               
+                   return $response    ->withStatus(400)
+                                       ->withHeader('Content-Type','application/json')
+                                       ->write('{"message":"Erro ao atualizar dados no banco"}');
+               }
+           }
+       }
+       else{
+       
+           return $response    ->withStatus(406)
+                               ->withHeader('Content-Type','application/json')
+                               ->write('{"message":"Formato de dados do header não é compativel com o json"}');
+       }
+
     });
     //EndPoint: DELETE, exclui um cliente no BD
-    $app->delete('/clientes', function($request, $response, $args){
-        return $response    ->withStatus(200)
-                            ->withHeader('Content-Type','application/json')
-                            ->write('{"message":"Item deletado com sucesso"}');
+    $app->delete('/clientes/{id}', function($request, $response, $args){
+        if(isset($args['id']) && is_numeric($args['id'])){
+
+            //import do arquivo para manipular dados a serem inseridos
+            require_once(RAIZ. "/controller/recebeDadosClientesAPI.php");
+
+            if(deletarClienteAPI($args['id'])){
+                return $response    ->withStatus(200)
+                                    ->withHeader('Content-Type','application/json')
+                                    ->write('{"message":"Item deletado com sucesso"}');
+            }
+            else{
+                return $response    ->withStatus(400)
+                                    ->withHeader('Content-Type','application/json')
+                                    ->write('{"message":"Falha ao deletadar cliente"}');
+            }
+        }
+        else{
+            return $response    ->withStatus(406)
+                                   ->withHeader('Content-Type','application/json')
+                                   ->write('{"message":"ID não encaminhado"}');
+        }
+
+        
     });
 
     //Carrega todos os endPoints para execução

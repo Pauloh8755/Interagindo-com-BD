@@ -7,10 +7,13 @@
 // require do arquivo de conexão com o BD
 require_once('../bd/conexaoMysql.php');
 
-//function para atualizae dados do cliente
+//function para atualizar dados do cliente
 function updateCliente($arrayCliente){
+    // echo("ok");
+    // die;
     $slq = "update tbl_cliente set 
                 nome ='".$arrayCliente['nome']."',
+                id_estado = ".$arrayCliente['id_estado'].",
                 foto = '".$arrayCliente['foto']."',
                 rg = '".$arrayCliente['rg']."',
                 cpf = '".$arrayCliente['cpf']."',
