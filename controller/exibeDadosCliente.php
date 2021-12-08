@@ -1,5 +1,4 @@
 <?php
-
 /*****************************************************************
     Objetivo: buscar ou listar os dados de clientes, solicitando ao 
     banco de dados.
@@ -16,6 +15,11 @@ function exibirClientes(){
    $dados = selectCliente();
 
    return $dados;
+}
+//função para buscar clientes através do nome
+function buscarClientesPeloNome($nome){
+    $dados = selectClienteNome($nome);
+    return $dados;
 }
 //função para tranformar um objeto em uma array
 function criarArray($objeto){

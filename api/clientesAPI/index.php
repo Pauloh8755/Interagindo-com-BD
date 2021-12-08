@@ -4,9 +4,6 @@
     //import do arquivo de configuração do sistema
     require_once("../functions/config.php");
      
-
-    
-
     //instancia da classe Slim\App utilizada para nos dar acesso aos métodos da classe
     $app = new \Slim\App();
 
@@ -21,16 +18,31 @@
     
     //Endpoint: GET, retorna todos os dados de clientes
     $app->get('/clientes', function($request, $response, $args){
-       //import do arquivo que solicita requisições de busca no BD
-     require_once("../controller/exibeDadosCliente.php");
+        //import do arquivo que solicita requisições de busca no BD
+        require_once("../controller/exibeDadosCliente.php");
+        //validando chegada de dados como parametro
+        if(isset($request ->getQueryParams()['nome'])){
+            //Recebendo dados pela queryString
+            $nome = (string) null;
+            //recebe variavél se ela for passada como parametro
+            $nome = $request ->getQueryParams()['nome'];
 
-        //chamando função para requisitar os dados do BD (na psta Controller)
-        if($listaDados = exibirClientes()){
-            if($arrayDados = criarArray($listaDados)){
-                $jsonCliente = criarJson($arrayDados);
-                
+            //recebendo dados dos clientes buscados
+            if($listaDados = buscarClientesPeloNome($nome)){
+                if($arrayDados = criarArray($listaDados)){
+                    $jsonCliente = criarJson($arrayDados);
+                }
             }
-        } 
+        }
+        else{
+            //chamando função para requisitar os dados do BD (na psta Controller)
+            if($listaDados = exibirClientes()){
+                if($arrayDados = criarArray($listaDados)){
+                    $jsonCliente = criarJson($arrayDados);
+                    
+                }
+            } 
+        }
         //validação para tratar BD sem conteúdo
         if($arrayDados){
             return $response    ->withStatus(200)
@@ -39,8 +51,7 @@
         }
         else{ 
             return $response    ->withStatus(204);
-                                
-                                
+                                               
         }
     });
 

@@ -33,4 +33,18 @@ function selectInstancia($idCliente){
 
     return $select;
 }
+//função para buscar clientes através do nome
+function selectClienteNome($nome){
+    $sql = "select tbl_cliente.*, tbl_estado.sigla from tbl_cliente inner join tbl_estado on tbl_estado.id_estado = tbl_cliente.id_estado where tbl_cliente.nome like '%".$nome."%'";
+
+    $conexao = conexaoMysql();
+
+    if($select = mysqli_query($conexao, $sql)){
+        return $select;
+    }
+    else{
+        return false;
+    }
+
+}
 ?> 
